@@ -12,8 +12,10 @@ export default class Paddle extends Phaser.GameObjects.Rectangle {
     }
 
     grow(duration = 10000) {
+        this.scene.audioController.play('paddleGrow');
         this.setScale(2, 1);
         this.scene.time.delayedCall(duration, () => {
+            this.scene.audioController.play('paddleShrink');
             this.setScale(1, 1);
         });
     }

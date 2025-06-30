@@ -1,4 +1,4 @@
-import eventHandler from "../helpers.js";
+import eventHandler, { getLogo } from "../helpers.js";
 
 export default class PauseMenu extends Phaser.Scene {
     constructor() {
@@ -6,7 +6,7 @@ export default class PauseMenu extends Phaser.Scene {
     }
 
     preload() {
-
+        getLogo(this);
     }
 
     create() {
@@ -14,6 +14,9 @@ export default class PauseMenu extends Phaser.Scene {
             fontSize: '64px',
             fill: '#FFFFFF',
         }).setOrigin(0.5);
+
+        this.logo = this.add.image(this.cameras.main.centerX + 300, this.cameras.main.centerY, 'Logo');
+        this.logo.setScale(0.05);
 
         this.input.keyboard.on('keydown', (e) => {
             if (e.keyCode === Phaser.Input.Keyboard.KeyCodes.P) {

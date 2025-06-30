@@ -24,3 +24,7 @@ export function dropRandomPowerUp(scene, x, y) {
         break;
     }
 };
+
+export function getLogo(scene) {
+    return scene.load.image('Logo', 'assets/images/Logo.png'); 
+};

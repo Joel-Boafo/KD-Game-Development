@@ -34,6 +34,7 @@ export default class BallController {
     }
 
     cloneBall() {
+        this.scene.audioController.play('cloneBall');
         const latestBall = this.balls[this.balls.length - 1];
         const newBall = latestBall.clone(this.scene);
         this.addBall(newBall);
@@ -48,6 +49,11 @@ export default class BallController {
                 this.setMainBall(newMain);
             }
         } else {
+            if (this.scene.lives !== 1) {
+                this.scene.audioController.play('lifeLost');
+            } else {
+                this.scene.audioController.play('gameOver');
+            }
             this.scene.lives--;
             this.scene.isAttachedToPaddle = true;
             this.scene.uiController.updateLives(this.scene.lives);

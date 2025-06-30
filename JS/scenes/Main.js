@@ -6,15 +6,18 @@ import BallController from "../Controllers/BallController.js";
 import { LEVELS, POWER_UP_TYPES } from "../constants.js";
 import UIController from "../Controllers/UIController.js";
 import { dropRandomPowerUp } from "../helpers.js";
+import AudioController from "../Controllers/AudioController.js";
 
 // Define the main game scene class
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: "GameScene" });
+
+    this.audioController = new AudioController(this);
   }
 
   preload() {
-    // Load assets/images here if needed
+    this.audioController.config();
   }
 
   create() {
@@ -55,6 +58,8 @@ export default class GameScene extends Phaser.Scene {
 
     // Creation
     this.paddle = new Paddle(this, 400, 570);
+
+    this.audioController.init();
 
     this.lava = this.add.rectangle(
       0,
@@ -170,6 +175,7 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     if (this.lives === 0) {
+      this.audioController.play('gameOver');
       // Stop physics and switch to GameOverScene
       this.physics.pause();
       this.scene.start("GameOverScene");
@@ -190,6 +196,7 @@ export default class GameScene extends Phaser.Scene {
         this.ball.body.setVelocity(0, 0); // Reset ball velocity until spacebar is pressed
       } else {
         this.physics.pause();
+        this.audioController.play('victory');
         this.scene.start("VictoryScene");
       }
     }
@@ -224,6 +231,7 @@ export default class GameScene extends Phaser.Scene {
 
   // Handles increasing of the score and the breaking of the bricks on collision
   ballBrickCollision(ball, brick) {
+    this.audioController.play('brickHit');
     brick.destroy();
     this.score++;
     this.brickController.decrementBricks();

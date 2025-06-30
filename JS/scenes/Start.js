@@ -1,4 +1,4 @@
-import eventHandler from "../helpers.js";
+import eventHandler, { getLogo } from "../helpers.js";
 
 export default class StartScene extends Phaser.Scene {
     constructor() {
@@ -6,14 +6,18 @@ export default class StartScene extends Phaser.Scene {
     }
 
     preload() {
-
+        getLogo(this);
     }
 
     create() {
+
         this.titleText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, 'Brick Breaker', {
             fontSize: '64px',
             fill: '#FFF',
         }).setOrigin(0.5);
+
+        this.logo = this.add.image(this.cameras.main.centerX + 300, this.cameras.main.centerY - 95, 'Logo');
+        this.logo.setScale(0.05);
 
         this.startText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Click to Start', {
             fontSize: '32px',
