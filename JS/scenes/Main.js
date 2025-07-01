@@ -30,6 +30,7 @@ export default class GameScene extends Phaser.Scene {
     this.levelIndex = 0;
     this.liveText;
     this.scoreText;
+    this.bestEducationText;
     this.isFullScreen = false;
     this.isAttachedToPaddle = true;
     this.levels = LEVELS;

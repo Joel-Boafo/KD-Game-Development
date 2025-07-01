@@ -7,6 +7,7 @@ export default class StartScene extends Phaser.Scene {
 
     preload() {
         getLogo(this);
+        this.load.image('bestEducation', 'assets/images/besteducation.png');
     }
 
     create() {
@@ -16,8 +17,8 @@ export default class StartScene extends Phaser.Scene {
             fill: '#FFF',
         }).setOrigin(0.5);
 
-        this.logo = this.add.image(this.cameras.main.centerX + 300, this.cameras.main.centerY - 95, 'Logo');
-        this.logo.setScale(0.05);
+        this.bestEducation = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 100, 'bestEducation');
+        this.bestEducation.setScale(0.05);
 
         this.startText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Click to Start', {
             fontSize: '32px',
